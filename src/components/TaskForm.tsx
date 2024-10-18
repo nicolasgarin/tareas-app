@@ -5,11 +5,16 @@ import { FaPlus } from "react-icons/fa";
 function TaskForm() {
   const { addTask } = useTaskStore();
   const [newTaskName, setNewTaskName] = useState("");
+  const [priority, setPriority] = useState<string>("baja");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (newTaskName.trim()) {
-      addTask({ nombre: newTaskName.trim(), checked: false });
+      addTask({
+        nombre: newTaskName.trim(),
+        checked: false,
+        priority: priority,
+      });
       setNewTaskName("");
     }
   };
@@ -23,7 +28,19 @@ function TaskForm() {
         placeholder="Nueva tarea"
         className="text-slate-800 rounded p-1 w-full"
       />
-      <button type="submit" className="rounded p-1 px-2 bg-blue-500"><FaPlus/></button>
+      <select
+        name="priority"
+        id="select-priority"
+        onChange={(e) => setPriority(e.target.value)}
+        className="text-slate-800 rounded p-1"
+      >
+        <option value="baja">Próximo</option>
+        <option value="media">Medio</option>
+        <option value="alta">Final</option>
+      </select>
+      <button type="submit" className="rounded p-1 px-2 bg-blue-500">
+        <FaPlus />
+      </button>
     </form>
   );
 }
