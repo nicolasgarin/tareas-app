@@ -17,7 +17,7 @@ const TaskList: React.FC = () => {
                 task.checked ? "text-green-400 line-through" : ""
               }`}
             >
-              {task.nombre}
+              {task.nombre} - {task.priority}
               <input
                 type="checkbox"
                 checked={task.checked}
